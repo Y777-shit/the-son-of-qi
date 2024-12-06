@@ -105,35 +105,65 @@
             text-decoration: none;
         }
 
-        .audio-control {
-            text-align: center;
-            margin: 20px 0;
-        }
-
+        /* 游戏区样式 */
         .game-container {
             text-align: center;
-            margin: 30px auto;
+            margin: 30px 0;
         }
 
+        #gameCanvas {
+            border: 1px solid #34495e;
+            background-color: #ecf0f1;
+        }
+
+        /* 词汇学习模块 */
         .word-list {
             list-style: none;
             padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+            margin: 20px 0;
         }
 
-        .word-item {
-            background-color: #ecf0f1;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 16px;
-            color: #34495e;
+        .word-list li {
+            padding: 10px;
+            background-color: #f0f4f8;
+            margin: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .audio-control {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .audio-control button {
+            color: white;
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .audio-control button:hover {
+            color: #1abc9c;
         }
     </style>
 </head>
 <body>
+
+    <!-- 音乐控制器 -->
+    <div class="audio-control">
+        <button id="playPauseBtn">播放音乐</button>
+        <audio id="bgMusic" loop>
+            <source src="https://www.youtube.com/embed/0Uhh62MUEic?si=owvUMW3rU3iW5z10" type="audio/mpeg">
+            您的浏览器不支持音频元素。
+        </audio>
+    </div>
 
     <!-- 英雄区 -->
     <div class="hero">
@@ -142,15 +172,6 @@
             <h1>风陵渡口</h1>
             <p>星河倒映，是时针交错的尽头</p>
         </div>
-    </div>
-
-    <!-- 音乐播放控制 -->
-    <div class="audio-control">
-        <audio id="background-music" loop autoplay>
-            <source src="https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbFNhaTRURkJtNG9MbHR0VjdzX2U4TTNiRXllQXxBQ3Jtc0tuTWIzbXg5ZnFlVzBveVhheEZNa1RrbkdsUXkyVnRuTV9CTUJNRXJfTzRhMkp5SUJqRjNHSW1oQ3FjVGdDRDZobGR1ZUNvMlIzOHZBdC1XY2Z0N0VzVTVtZHpjd2phclJoZm5mMjlYVEtrU25OQ3B4TQ&q=https%3A%2F%2Fstorage.googleapis.com%2Fmedia.mp3" type="audio/mpeg">
-            您的浏览器不支持音频播放。
-        </audio>
-        <button onclick="toggleMusic()">暂停/播放音乐</button>
     </div>
 
     <!-- 主要内容 -->
@@ -179,27 +200,22 @@
         </p>
     </div>
 
-    <!-- 单词学习 -->
-    <div class="content-container">
-        <h2>CET-4 和雅思词汇学习</h2>
-        <ul class="word-list">
-            <li class="word-item">abandon</li>
-            <li class="word-item">benefit</li>
-            <li class="word-item">concern</li>
-            <li class="word-item">develop</li>
-            <li class="word-item">efficient</li>
-            <li class="word-item">factor</li>
-            <li class="word-item">glance</li>
-            <li class="word-item">honor</li>
-            <li class="word-item">impact</li>
-            <li class="word-item">justify</li>
-        </ul>
+    <!-- 小游戏 -->
+    <div class="content-container game-container">
+        <h2>互动小游戏</h2>
+        <canvas id="gameCanvas" width="300" height="300"></canvas>
     </div>
 
-    <!-- 游戏区 -->
-    <div class="game-container">
-        <h2>趣味小游戏</h2>
-        <iframe src="https://games.example.com/simple-game" width="600" height="400" style="border:none;"></iframe>
+    <!-- 词汇学习模块 -->
+    <div class="content-container">
+        <h2>CET4与雅思词汇</h2>
+        <ul class="word-list">
+            <li><strong>abandon</strong> - 放弃</li>
+            <li><strong>abstract</strong> - 摘要；抽象的</li>
+            <li><strong>access</strong> - 接近；使用权</li>
+            <li><strong>accommodate</strong> - 容纳；适应</li>
+            <li><strong>achieve</strong> - 实现；达到</li>
+        </ul>
     </div>
 
     <!-- 页脚 -->
@@ -208,15 +224,57 @@
     </div>
 
     <script>
-        function toggleMusic() {
-            const music = document.getElementById('background-music');
-            if (music.paused) {
-                music.play();
-            } else {
-                music.pause();
-            }
-        }
-    </script>
+        // 音乐控制脚本
+        const bgMusic = document.getElementById('bgMusic');
+        const playPauseBtn = document.getElementById('playPauseBtn');
 
+        playPauseBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                playPauseBtn.textContent = '暂停音乐';
+            } else {
+                bgMusic.pause();
+                playPauseBtn.textContent = '播放音乐';
+            }
+        });
+
+        // 简单小游戏脚本
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let x = canvas.width / 2;
+        let y = canvas.height / 2;
+        let dx = 2;
+        let dy = 2;
+        let radius = 10;
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#1abc9c';
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function updateGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBall();
+
+            if (x + dx > canvas.width - radius || x + dx < radius) {
+                dx = -dx;
+            }
+
+            if (y + dy > canvas.height - radius || y + dy < radius) {
+                dy = -dy;
+            }
+
+            x += dx;
+            y += dy;
+
+            requestAnimationFrame(updateGame);
+        }
+
+        updateGame();
+    </script>
 </body>
 </html>
