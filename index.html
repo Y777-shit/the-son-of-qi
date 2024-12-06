@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人网站</title>
+    <title>杨瑾琦的个人网站</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            background-color: #f4f4f9;
         }
 
+        /* 背景图片 */
         .background {
-            background-image: url('https://i.imgur.com/2DF41Se.jpg'); /* 天津背景 */
+            background-image: url('https://img.moegirl.org.cn/common/1/16/Shinchan.jpg'); /* 蜡笔小新图片 */
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             height: 100vh;
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -25,134 +28,72 @@
             opacity: 0.2;
         }
 
-        /* 蜡笔小新背景 */
-        .shin-chan-background {
-            background-image: url('https://i.imgur.com/ZQL0yYX.jpg'); /* 蜡笔小新背景 */
-            background-size: cover;
-            background-position: center;
-            padding: 20px;
-            margin-top: 20px;
+        .content-container {
+            padding: 30px;
+            margin: 50px auto;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.95);
             border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* Eva背景 */
-        .eva-background {
-            background-image: url('https://i.imgur.com/WwU9jd1.jpg'); /* Eva背景 */
-            background-size: cover;
-            background-position: center;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 10px;
+        h2, h3 {
+            text-align: center;
+            color: #2c3e50;
         }
 
-        .survey-container, .comment-section {
-            padding: 20px;
-            margin: 0 auto;
-            max-width: 600px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
+        p, ul {
+            font-size: 16px;
+            color: #34495e;
+            line-height: 1.8;
         }
 
-        button {
-            background-color: #4CAF50;
-            color: white;
+        .resources-list {
+            padding-left: 20px;
+        }
+
+        .resources-list li {
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            margin: 20px auto;
             padding: 10px 20px;
-            border: none;
-            cursor: pointer;
+            background-color: #2c3e50;
+            color: white;
+            text-decoration: none;
             border-radius: 5px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .comment-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        .comment-author {
+            width: 200px;
             font-weight: bold;
         }
 
-        .shin-chan, .eva {
-            margin-top: 30px;
-            text-align: center;
+        .btn:hover {
+            background-color: #1a242f;
+            transform: scale(1.05);
         }
-
-        .shin-chan img, .eva img {
-            width: 150px;
-            height: auto;
-            border-radius: 10px;
-            margin: 10px;
-        }
-
     </style>
 </head>
 <body>
-    <div class="background"></div> <!-- 天津背景图片 -->
 
-    <!-- 蜡笔小新元素区域 -->
-    <section id="shin-chan" class="shin-chan-background">
-        <h2>欢迎来到我的蜡笔小新专区</h2>
-        <img src="https://i.imgur.com/f6MBye5.png" alt="蜡笔小新" /> <!-- 蜡笔小新图片 -->
-        <p>哇哈哈哈，大家好！我是蜡笔小新，欢迎光临！</p>
-    </section>
+    <div class="background"></div>
 
-    <!-- Eva元素区域 -->
-    <section id="eva" class="eva-background">
-        <h2>新世纪福音战士专区</h2>
-        <img src="https://i.imgur.com/F9YPZ7h.jpg" alt="Eva" /> <!-- Eva角色图片 -->
-        <p>战斗开始！跟随EVA一起踏上冒险之旅。</p>
-    </section>
+    <div class="content-container">
+        <h2>杨瑾琦的个人网站</h2>
+        <p>欢迎来到我的个人网站，这里不仅有诗歌分享，还有丰富的 CET4 学习资源。希望对你有所帮助！</p>
+    </div>
 
-    <!-- 调查问卷区域 -->
-    <section id="survey">
-        <div class="survey-container">
-            <h2>调查问卷 - 关于我网站的体验</h2>
-            <form action="#" method="POST">
-                <label for="experience">你对网站的体验如何？</label>
-                <select name="experience" id="experience" required>
-                    <option value="good">很好</option>
-                    <option value="average">一般</option>
-                    <option value="poor">差</option>
-                </select>
-
-                <label for="feedback">请给出你的反馈意见：</label>
-                <textarea name="feedback" id="feedback" rows="4" required></textarea>
-
-                <label for="name">你的名字：</label>
-                <input type="text" name="name" id="name" required>
-
-                <button type="submit">提交</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- 评论区域 -->
-    <section id="comments">
-        <div class="comment-section">
-            <h2>评论区</h2>
-            <div class="comment-item">
-                <p class="comment-author">小明:</p>
-                <p>网站很有趣，背景也很漂亮！</p>
-            </div>
-            <div class="comment-item">
-                <p class="comment-author">小红:</p>
-                <p>很喜欢蜡笔小新，网站做得很有创意！</p>
-            </div>
-        </div>
-    </section>
+    <div class="content-container">
+        <h3>CET4 学习资源</h3>
+        <p>以下是一些高效备考 CET4 的资源：</p>
+        <ul class="resources-list">
+            <li>常用单词表：高频词汇和短语整理。</li>
+            <li><a href="https://www.51cet4.com" target="_blank">听力练习</a>：在线练习，提高听力能力。</li>
+            <li>考试技巧：掌握答题策略，高效应考。</li>
+        </ul>
+        <a href="https://www.51cet4.com" target="_blank" class="btn">前往学习平台</a>
+    </div>
 
 </body>
 </html>
