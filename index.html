@@ -62,12 +62,6 @@
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .content-container:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            transform: translateY(-5px);
         }
 
         h2 {
@@ -111,45 +105,31 @@
             text-decoration: none;
         }
 
-        /* 音乐播放按钮 */
-        #musicPlayer {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 10;
-        }
-
-        iframe {
-            border: none;
-            width: 300px;
-            height: 50px;
-        }
-
-        #closeButton {
-            background-color: #e74c3c;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* 跳转按钮样式 */
-        .more-button {
-            display: inline-block;
-            background-color: #1abc9c;
-            color: white;
-            padding: 12px 25px;
-            font-size: 18px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
+        .audio-control {
             text-align: center;
+            margin: 20px 0;
         }
 
-        .more-button:hover {
-            background-color: #16a085;
+        .game-container {
+            text-align: center;
+            margin: 30px auto;
+        }
+
+        .word-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .word-item {
+            background-color: #ecf0f1;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #34495e;
         }
     </style>
 </head>
@@ -162,6 +142,15 @@
             <h1>风陵渡口</h1>
             <p>星河倒映，是时针交错的尽头</p>
         </div>
+    </div>
+
+    <!-- 音乐播放控制 -->
+    <div class="audio-control">
+        <audio id="background-music" loop autoplay>
+            <source src="https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbFNhaTRURkJtNG9MbHR0VjdzX2U4TTNiRXllQXxBQ3Jtc0tuTWIzbXg5ZnFlVzBveVhheEZNa1RrbkdsUXkyVnRuTV9CTUJNRXJfTzRhMkp5SUJqRjNHSW1oQ3FjVGdDRDZobGR1ZUNvMlIzOHZBdC1XY2Z0N0VzVTVtZHpjd2phclJoZm5mMjlYVEtrU25OQ3B4TQ&q=https%3A%2F%2Fstorage.googleapis.com%2Fmedia.mp3" type="audio/mpeg">
+            您的浏览器不支持音频播放。
+        </audio>
+        <button onclick="toggleMusic()">暂停/播放音乐</button>
     </div>
 
     <!-- 主要内容 -->
@@ -178,7 +167,6 @@
             千年风尘拂过掌心，千年城墙铭刻于心。是执一念白首，换得佳人归。<br>
             是执此一念，爱汝一生，如晨曦初露。温柔的光，洒下幸福的诺言，在心间流淌。
         </p>
-        <a href="https://example.com" class="more-button">访问更多内容</a>
     </div>
 
     <div class="content-container">
@@ -189,13 +177,29 @@
             每一滴水，绘成山川与溪流的诗篇。<br>
             依然是，不磨灭的晨曦，永恒的期盼。
         </p>
-        <a href="https://example.com" class="more-button">探索更多诗意</a>
     </div>
 
-    <!-- 音乐播放器 -->
-    <div id="musicPlayer">
-        <iframe src="https://www.youtube.com/embed/0Uhh62MUEic?autoplay=1&loop=1&playlist=0Uhh62MUEic" allow="autoplay; encrypted-media"></iframe>
-        <button id="closeButton" onclick="closeMusic()">关闭音乐</button>
+    <!-- 单词学习 -->
+    <div class="content-container">
+        <h2>CET-4 和雅思词汇学习</h2>
+        <ul class="word-list">
+            <li class="word-item">abandon</li>
+            <li class="word-item">benefit</li>
+            <li class="word-item">concern</li>
+            <li class="word-item">develop</li>
+            <li class="word-item">efficient</li>
+            <li class="word-item">factor</li>
+            <li class="word-item">glance</li>
+            <li class="word-item">honor</li>
+            <li class="word-item">impact</li>
+            <li class="word-item">justify</li>
+        </ul>
+    </div>
+
+    <!-- 游戏区 -->
+    <div class="game-container">
+        <h2>趣味小游戏</h2>
+        <iframe src="https://games.example.com/simple-game" width="600" height="400" style="border:none;"></iframe>
     </div>
 
     <!-- 页脚 -->
@@ -204,11 +208,13 @@
     </div>
 
     <script>
-        // 关闭音乐功能
-        function closeMusic() {
-            var iframe = document.querySelector('iframe');
-            iframe.style.display = 'none';
-            document.getElementById('closeButton').style.display = 'none';
+        function toggleMusic() {
+            const music = document.getElementById('background-music');
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
         }
     </script>
 
